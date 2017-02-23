@@ -5,8 +5,8 @@
 }
 
 .artist-thumbnail {
-  width: 80px;
-  height: auto;
+  width: 100px;
+  height: 100px;
   float: left;
   margin-right: 20px;
 }
@@ -29,10 +29,13 @@
 }
 
 .margin-100 {
-  margin-left: 100px;
+  margin-left: 120px;
 }
 
 .btn2 {
   margin-left: 10px;
 }
 
+.back {
+  text-align: center;
+}

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { Location } from '@angular/common';
 import { DomSanitizer } from '@angular/platform-browser';
 import { SpotifyService } from '../services/spotify.service';
 import { Artist } from '../models/artist';
@@ -17,7 +18,8 @@ export class AppAlbumComponent implements OnInit {
   country: string;
   constructor(private spotifyService: SpotifyService,
               private route: ActivatedRoute,
-              private sanitizer: DomSanitizer) { }
+              private sanitizer: DomSanitizer,
+              private location: Location) { }
 
   ngOnInit() {
     this.spotifyService.getVisitorsCountry()
@@ -51,7 +53,10 @@ export class AppAlbumComponent implements OnInit {
       }
     })
     return isAvailable;
-
   }
+
+  goBack() {
+      this.location.back();
+    }
 
 }

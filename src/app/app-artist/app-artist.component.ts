@@ -4,6 +4,7 @@ import { SpotifyService } from '../services/spotify.service';
 import { Artist } from '../models/artist';
 import { Album } from '../models/album';
 import { ActivatedRoute } from '@angular/router';
+import { Location } from '@angular/common';
 
 @Component({
   moduleId: module.id,
@@ -17,7 +18,8 @@ export class AppArtistComponent implements OnInit {
   albums: Album[]
   constructor(private spotifyService: SpotifyService,
               private route: ActivatedRoute,
-              private sanitizer: DomSanitizer) { }
+              private sanitizer: DomSanitizer,
+              private location: Location) { }
 
   ngOnInit() { 
     this.route.params.map(params => params['id'])
@@ -42,6 +44,10 @@ export class AppArtistComponent implements OnInit {
 
   sanitize(url: string){
     return this.sanitizer.bypassSecurityTrustUrl(url);
+    }
+
+    goBack() {
+      this.location.back();
     }
 
 }
