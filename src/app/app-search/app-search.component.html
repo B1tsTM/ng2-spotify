@@ -1,6 +1,6 @@
 <h1>Looking For a Song?</h1>
 <p class="lead">Use ng Spotify to find any band or song from all over the world</p>
-<form #searchForm="ngForm" *ngIf="searchType" (ngSubmit)="doNothing()">
+<form #searchForm="ngForm" (ngSubmit)="doNothing()">
   <div class="form-group">
     <input type="text" name="searchStr" [(ngModel)]="searchStr" class="form-control" placeholder="Search Music..." (input)="searchMusic()">
   </div>
