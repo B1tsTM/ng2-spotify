@@ -1,3 +1,13 @@
 .album-thumbnail {
   width: 100%;
 }
+
+.indianred {
+  color: indianred;
+}
+
+.subtext {
+  color: white;
+  font-weight: normal;
+  font-size: 15px;
+}

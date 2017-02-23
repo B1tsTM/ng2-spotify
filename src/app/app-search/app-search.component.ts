@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { SpotifyService } from '../services/spotify.service';
+import { ToastrService } from '../services/toastr.service';
 import { Artist } from '../models/artist';
 
 @Component({
@@ -11,7 +12,9 @@ import { Artist } from '../models/artist';
 export class AppSearchComponent implements OnInit {
   searchStr: string;
   searchResults: Artist[] = [];
-  constructor(private spotifyService: SpotifyService) { }
+  
+  constructor(private spotifyService: SpotifyService,
+              private toastr: ToastrService) { }
 
   ngOnInit() { }
 
@@ -21,7 +24,10 @@ export class AppSearchComponent implements OnInit {
         this.searchResults = res.artists.items;
       },
       error => {
-        console.error(error);
+        this.toastr.error('Error occurred!', 'Error!')
       });
+
   }
+
+  doNothing() {}
 }

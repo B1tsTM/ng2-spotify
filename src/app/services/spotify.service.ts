@@ -17,6 +17,12 @@ export class SpotifyService {
       .map(res => res.json());
   }
 
+  searchAlbums(input: string, type='artist') {
+    this.searchUrl = 'https://api.spotify.com/v1/search?query='+input+'&offset=0&limit=20&type='+type+'&market=US';
+    return this.http.get(this.searchUrl)
+      .map(res => res.json());
+  }
+
   getArtist(id: string) {
     this.artistUrl = 'https://api.spotify.com/v1/artists/'+id;
     return this.http.get(this.artistUrl)
@@ -33,6 +39,11 @@ export class SpotifyService {
     this.albumUrl = 'https://api.spotify.com/v1/albums/'+albumId;
     return this.http.get(this.albumUrl)
       .map(res => res.json());
+  }
+
+  getVisitorsCountry() {
+    return this.http.get('https://ipinfo.io')
+      .map(res => JSON.parse(res['_body']))
   }
 
 }

@@ -5,8 +5,14 @@
     </div>
     <h1>{{artist.name}}</h1>
     <p *ngIf="artist.genres.length > 0">
-      Genres: <span *ngFor="let genre of artist.genres">{{genre}}, </span>
+      Genres: <span *ngFor="let genre of artist.genres; let i=index">{{genre}}{{i == artist.genres.length -1 ? '' : ', '}}</span>
     </p>
+    <p class="margin-100">Popularity: {{artist.popularity}} <i class="glyphicon glyphicon-question-sign" popover="The value will be between 0 and 100, with 100 being the most popular. The artist's popularity is calculated from the popularity of all the artist's tracks." triggers="mouseenter:mouseleave"></i></p>
+    <p class="margin-100">Followers: {{artist.followers.total}}</p>
+    <div class="btn-line">
+      <a href="{{artist.external_urls.spotify}}" class="btn btn-primary margin-100">View on Website</a>
+      <a [href]="sanitize(artist.uri)" class="btn btn-primary btn2">View in Spotify</a>
+    </div>
   </header>
   <div class="artist-albums">
     <div class="row">

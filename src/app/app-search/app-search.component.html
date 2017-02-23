@@ -1,8 +1,8 @@
 <h1>Looking For a Song?</h1>
 <p class="lead">Use ng Spotify to find any band or song from all over the world</p>
-<form>
+<form #searchForm="ngForm" *ngIf="searchType" (ngSubmit)="doNothing()">
   <div class="form-group">
-    <input type="text" name="searchStr" [(ngModel)]="searchStr" class="form-control" placeholder="Search Music..." (keyup)="searchMusic()">
+    <input type="text" name="searchStr" [(ngModel)]="searchStr" class="form-control" placeholder="Search Music..." (input)="searchMusic()">
   </div>
 </form>
 
@@ -13,8 +13,8 @@
         <div class="search-res well">
           <h4><a routerLink="/artist/{{res.id}}">{{ res.name }}</a></h4>
           <div>
-            <strong>Genres: </strong>
-            <span *ngFor="let genre of res.genres">{{genre}}</span>
+            <strong *ngIf="res.genres.length > 0">Genres: </strong>
+            <span *ngFor="let genre of res.genres">{{genre}}, </span>
           </div>
         </div>
       </div>

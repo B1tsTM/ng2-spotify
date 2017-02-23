@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { DomSanitizer } from '@angular/platform-browser';
 import { SpotifyService } from '../services/spotify.service';
 import { Artist } from '../models/artist';
 import { Album } from '../models/album';
@@ -15,7 +16,8 @@ export class AppArtistComponent implements OnInit {
   artist: Artist[];
   albums: Album[]
   constructor(private spotifyService: SpotifyService,
-              private route: ActivatedRoute) { }
+              private route: ActivatedRoute,
+              private sanitizer: DomSanitizer) { }
 
   ngOnInit() { 
     this.route.params.map(params => params['id'])
@@ -23,14 +25,23 @@ export class AppArtistComponent implements OnInit {
         this.spotifyService.getArtist(id)
           .subscribe(artist => {
             this.artist = artist;
+            //console.log('artist: ', this.artist);
+          }, error => {
+            console.error(error);
           })
 
           this.spotifyService.getAlbums(id)
           .subscribe(albums => {
             this.albums = albums.items;
+            //console.log('albums: ', this.albums);
+          }, error => {
+            console.error(error);
           })
-      })
+      }, error => console.error(error))
   }
 
+  sanitize(url: string){
+    return this.sanitizer.bypassSecurityTrustUrl(url);
+    }
 
 }
